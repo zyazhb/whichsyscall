@@ -1,0 +1,5 @@
+#/bin/bash
+# usage: whichsyscall <syscall_number>
+nr="$1"
+file=/usr/include/asm-generic/unistd.h
+gawk '$1=="#define" && $3=="'$nr'" {sub("^__NR_","",$2);print $2}' "$file"
